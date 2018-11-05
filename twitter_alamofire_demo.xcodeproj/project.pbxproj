@@ -156,12 +156,12 @@
 			isa = PBXGroup;
 			children = (
 				30505AA921713108003DC596 /* Models */,
-				ED1AFD341E942B2500FD4B90 /* Main.storyboard */,
 				ED1D23501EF7650B00C51ACC /* API */,
 				ED1D234A1EF6E3B800C51ACC /* View Controllers */,
+				ED1AFD371E942B2500FD4B90 /* Assets.xcassets */,
 				EDC4B7361E98627100D836AC /* twitter_alamofire_demo.entitlements */,
 				ED1AFD301E942B2500FD4B90 /* AppDelegate.swift */,
-				ED1AFD371E942B2500FD4B90 /* Assets.xcassets */,
+				ED1AFD341E942B2500FD4B90 /* Main.storyboard */,
 				ED1AFD391E942B2500FD4B90 /* LaunchScreen.storyboard */,
 				ED1AFD3C1E942B2500FD4B90 /* Info.plist */,
 			);

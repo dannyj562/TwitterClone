@@ -10,6 +10,8 @@ import UIKit
 
 class TimelineViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +23,10 @@ class TimelineViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func didTapLogout(_ sender: Any) {
+        APIManager.shared.logout()
+    }
+    
     /*
     // MARK: - Navigation
 

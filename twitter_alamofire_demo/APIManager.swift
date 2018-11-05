@@ -15,8 +15,8 @@ import KeychainAccess
 class APIManager: SessionManager {
     
     // MARK: TODO: Add App Keys
-    static let consumerKey = "uFTmFW66AAMEUwx3rZlZDMSCf"
-    static let consumerSecret = "LtlxIoQpBvHcqjpSMIA9Gs2E9wCJbr7xkx9EpSdBYoNedaZUgh"
+    static let consumerKey = "zlvFqM5QM2aYFjFZLt7XHnlvm"
+    static let consumerSecret = "R9O45wDvGTvCuMwV3p0E5YVki51TC9jeAkKn72uoxs4IasZo9S"
 
     static let requestTokenURL = "https://api.twitter.com/oauth/request_token"
     static let authorizeURL = "https://api.twitter.com/oauth/authorize"
@@ -31,6 +31,10 @@ class APIManager: SessionManager {
         let callbackURL = URL(string: APIManager.callbackURLString)!
         oauthManager.authorize(withCallbackURL: callbackURL, success: { (credential, _response, parameters) in
             
+            NSLog("Credential:  \(credential)")
+            NSLog("Response: \(_response)")
+            NSLog("Parameters: \(parameters)")
+            
             // Save Oauth tokens
             self.save(credential: credential)
             
@@ -39,8 +43,9 @@ class APIManager: SessionManager {
                     failure(error)
                 } else if let user = user {
                     print("Welcome \(user.name)")
-                    
+                    User.current = user
                     // MARK: TODO: set User.current, so that it's persisted
+                    
                     
                     success()
                 }
@@ -122,6 +127,13 @@ class APIManager: SessionManager {
     
     // MARK: TODO: Get User Timeline
     
+    func logout() {
+        // Clear current user
+        User.current = nil
+        
+        // Post logout notification
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+    }
     
     //--------------------------------------------------------------------------------//
     
@@ -163,17 +175,17 @@ class APIManager: SessionManager {
     
     // MARK: Save Tokens in Keychain
     private func save(credential: OAuthSwiftCredential) {
-        
         // Store access token in keychain
         let keychain = Keychain()
         let data = NSKeyedArchiver.archivedData(withRootObject: credential)
         keychain[data: "twitter_credentials"] = data
+        NSLog("Keychain[twitter_credentials]  \(keychain[data: "twitter_credentials"])")
+        
     }
     
     // MARK: Retrieve Credentials
     private func retrieveCredentials() -> OAuthSwiftCredential? {
         let keychain = Keychain()
-        
         if let data = keychain[data: "twitter_credentials"] {
             let credential = NSKeyedUnarchiver.unarchiveObject(with: data) as! OAuthSwiftCredential
             return credential

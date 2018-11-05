@@ -13,26 +13,23 @@ import OAuthSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let oauthSwift = OAuth1Swift(
-        consumerKey: "uFTmFW66AAMEUwx3rZlZDMSCf",
-        consumerSecret: "LtlxIoQpBvHcqjpSMIA9Gs2E9wCJbr7xkx9EpSdBYoNedaZUgh",
-        requestTokenUrl: "https://api.twitter.com/oauth/request_token",
-        authorizeUrl: "https://api.twitter.com/oauth/authorize",
-        accessTokenUrl: "https://api.twitter.com/oauth/access_token"
-    )
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // MARK: TODO: Check for logged in user
-        let callbackURL = URL(string: "yoururlscheme://")!
+        if User.current != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeTimelineViewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController") as! TimelineViewController
+            let navigationController = UINavigationController.init(rootViewController: homeTimelineViewController)
+            self.window?.rootViewController = navigationController
+        }
         
-        oauthSwift.authorize(withCallbackURL: callbackURL, success: { (credential, response, parameters) in
-            // Handle successful authentication
-            print("token: \(credential.oauthToken)")
-            print("secret: \(credential.oauthTokenSecret)")
-        }) { (error) in
-            print(error.localizedDescription)
+        NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Logout notification received")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = loginVC
+            
+            
         }
         
         return true
