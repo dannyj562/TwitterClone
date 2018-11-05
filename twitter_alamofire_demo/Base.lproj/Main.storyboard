@@ -126,6 +126,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="ejn-Gv-CeR"/>
                                                     </constraints>
                                                     <state key="normal" image="retweet-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="U1g-kw-izy" eventType="touchUpInside" id="cGc-ys-Eer"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-Wb-7NG">
                                                     <rect key="frame" x="214" y="133" width="30" height="30"/>
@@ -134,6 +137,9 @@
                                                         <constraint firstAttribute="width" constant="30" id="vas-o9-jfq"/>
                                                     </constraints>
                                                     <state key="normal" image="favor-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="U1g-kw-izy" eventType="touchUpInside" id="fpp-9i-bJT"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5e-LU-NME">
                                                     <rect key="frame" x="289" y="133" width="30" height="30"/>
