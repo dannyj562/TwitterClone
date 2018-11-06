@@ -60,10 +60,17 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    func did(post: Tweet) {
+        fetchTimeLine()
+    }
+    
     @IBAction func didTapLogout(_ sender: Any) {
         APIManager.shared.logout()
     }
     
+    @IBAction func didTapNewPost(_ sender: Any) {
+        self.performSegue(withIdentifier: "ComposeSegue", sender: self)
+    }
     /*
     // MARK: - Navigation
 
